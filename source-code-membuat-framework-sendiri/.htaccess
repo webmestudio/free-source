@@ -1,0 +1,39 @@
+<ifModule mod_rewrite.c>
+
+    # Menolak Pembacaan .htaccess 
+    <files .htaccess>
+        order allow,deny
+        deny from all
+    </files>
+    
+    <IfModule mod_negotiation.c>
+        Options All -Indexes
+    </IfModule>
+
+    RewriteEngine On
+        
+    # DISINI TEMPAT PENGATURAN RUTE URL SERVER
+    #-------------------------------------------------------------------------
+        # Document Error
+        # jika disimpan di subfolder silahkan untuk ubah /404 to /subfolder/404
+        #ErrorDocument 401 /subfolder-jika-ada/404
+        #ErrorDocument 403 /subfolder-jika-ada/404
+        #ErrorDocument 404 /subfolder-jika-ada/404
+        #ErrorDocument 500 /subfolder-jika-ada/404
+    
+        # Redirect Trailing Slashes If Not A Folder
+        # jika disimpan di subfolder silahkan untuk ubah /$1 to /subfolder/$1
+        #RewriteCond %{REQUEST_FILENAME} !-d
+        #RewriteRule ^(.*)/$ /subfolder-jika-ada/$1 [L,R=301]
+    
+        # Redirect If User Make URL '/index.php/param/'
+        # jika disimpan di subfolder silahkan untuk ubah / to /subfolder/
+        #RewriteRule ^index\.php(.+)$ /demo/ [R,L,QSA]
+    #-------------------------------------------------------------------------
+
+    # Handle Front Controller
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php/$1 [L]
+
+</ifModule>

@@ -1,0 +1,8 @@
+Options All -Indexes
+RewriteEngine On
+
+# silahkan jalur projek nya
+RewriteBase /blogspot/demo/teknik-url-friendly-php-mysql-htaccess/
+
+#rewrite ?username=$1 to username di database
+RewriteRule ^/?([^/\.]+)$ profile.php?username=$1 [L,NC,QSA]
